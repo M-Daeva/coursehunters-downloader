@@ -12,6 +12,9 @@ A plugin for downloading video from https://coursehunters.net
 ## Installation
 
 ```sh
+md ch-loader
+cd ch-loader
+npm init -y
 npm i coursehunters-downloader
 ```
 
