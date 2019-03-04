@@ -42,6 +42,12 @@ node index.js
 Here is a list of supported `range` attribute configurations:
 
 ```sh
+// downloads full course
+loader(url);
+
+// downloads full course to "new-course" folder
+loader(url, {}, "./new-course");
+
 // downloads videos from 2nd up to last inclusively
 loader(url, {from: 2});
 
