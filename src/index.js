@@ -3,7 +3,7 @@ const l = console.log.bind(console);
 const axios = require("axios"),
   { createWriteStream, existsSync, mkdirSync } = require("fs");
 
-const loader = (courseURL, { from, to }, baseDir) => {
+const loader = (courseURL, { from, to } = { from: 1, to: 1 }, baseDir) => {
   const getURLs = async url => {
     const list = {
         from: `<ul id="lessons-list" class="lessons-list">`,
