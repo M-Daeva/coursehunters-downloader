@@ -1,6 +1,6 @@
-# pug-to-react-element
+# coursehunters-downloader
 
-A plugin for producing React elements from Pug templates without JSX
+A plugin for downloading video from https://coursehunters.net
 
 ## Table of Contents
 
@@ -11,8 +11,6 @@ A plugin for producing React elements from Pug templates without JSX
 - [Contributing](#contributing)
 
 ## Installation
-
-A plugin does not download any packages but require React module.
 
 ```sh
 npm i pug-to-react-element
