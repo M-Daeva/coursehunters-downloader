@@ -1,11 +1,10 @@
 {
-  "name": "coursehunters-downloader",
+  "name": "coursehunters-downloader-test",
   "version": "1.0.0",
   "description": "A plugin for downloading video from https://coursehunters.net",
-  "main": "dist/index.min.js",
+  "main": "src/index.js",
   "scripts": {
-    "prep": "npm i -D uglify-es",
-    "min": "./node_modules/.bin/uglifyjs src/index.js -c -m -o dist/index.min.js"
+    "ndm": "nodemon ./index.js localhost 8080"
   },
   "keywords": [
     "npm",
@@ -17,6 +16,9 @@
   "homepage": "https://github.com/Fewed/coursehunters-downloader",
   "license": "MIT",
   "devDependencies": {
-    "uglify-es": "^3.3.9"
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
   }
 }
