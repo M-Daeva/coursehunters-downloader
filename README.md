@@ -6,101 +6,62 @@ A plugin for downloading video from https://coursehunters.net
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Syntax](#syntax)
 - [Support](#support)
 - [Contributing](#contributing)
 
 ## Installation
 
 ```sh
-npm i pug-to-react-element
+npm i coursehunters-downloader
 ```
 
 ## Usage
 
-### API
-
-- `pre(markup)` - transforms Pug template string markup into React element structure. It is exported as default. A static property `tabSize` defines markup indentation.
-- `getID()` - generates unique string. Can be used for React element "key" property.
-
-### Example
-
-Create React component `MyComponent.js`:
+Create `index.js`:
 
 ```sh
-import React, { Component } from "react";
-import pre from "pug-to-react-element";
+// get loader function, check "Options" section for details
+const loader = require("./coursehunters-downloader");
 
-// config indentation size in range from 2 (default) to 4 if it needs
-// pre.tabSize = 4;
+const url = "https://coursehunters.net/course/regulyarnye-vyrazheniya";
 
-const markup = `
+loader(url);
 
-div() 0#[span() 1]2#[span() 3]4
-div()
-  div() 5
-    6
-    span() 7
-    8
-div() 9
-    div() 10
-      div() 11
-    input(type="tel" required)
-
-`;
-
-class MyComponent extends Component {
-	render() {
-		return pre(markup);
-	}
-}
-
-export default MyComponent;
 ```
 
-Use it:
+Run script with:
 
 ```sh
-import ReactDOM from "react-dom";
-import React, { Component } from "react";
-import MyComponent from "./components/MyComponent.js";
-
-const   root = document.querySelector("#root"),
-        myComponent = new MyComponent().render();
-
-ReactDOM.render(myComponent, root);
+node index.js
 ```
 
-## Syntax
+### Options
 
-A plugin uses limited [pug](https://pugjs.org/api/getting-started.html) syntax. Here is a list of supported constructions:
+- `loader(courseURL, range, baseDir)` - downloads video files from `courseURL` base route and saves it as .mp4 to `baseDir` folder. `range` attribute defines it's id range. By default `baseDir` is defined by the end of `courseURL` and `range` includes full course video list.
+
+Here is a list of supported `range` attribute configurations:
 
 ```sh
-// creates <div></div>
-div()
+// downloads videos from 2nd up to last inclusively
+loader(url, {from: 2});
 
-// creates <input id="id0" className=".div" required>
-input(id="id0" className=".div" required)
+// downloads videos from 1st up to 5th inclusively
+loader(url, {to: 5});
 
-// creates <p>Lorem ipsum</p>
-p() Lorem ipsum
+// downloads videos from 3rd up to 7th inclusively
+loader(url, {from: 3, to: 7});
 
-// creates <div></div><p></p>
-div()
-p()
+// downloads 1st, 3rd, 4th videos
+loader(url, {from: [1, 3, 4]});
 
-// creates <div><p></p></div>
-div()
-    p()
-
-// creates <div>0<span>1</span>2</div>
-div() 0#[span() 1]2
+// effect is the same
+loader(url, {to: [1, 3, 4]});
 ```
 
 ## Support
 
-Please [open an issue](https://github.com/Fewed/Pug-to-React-elements/issues/new) for support.
+Please [open an issue](https://github.com/Fewed/coursehunters-downloader/issues/new) for support.
 
 ## Contributing
 
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/Fewed/Pug-to-React-elements/compare).
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/Fewed/coursehunters-downloader/compare).
