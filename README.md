@@ -1,6 +1,6 @@
 # coursehunters-downloader
 
-A plugin for downloading video from https://coursehunters.net
+A plugin for downloading videos from https://coursehunters.net
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ Create `index.js`:
 
 ```sh
 // get loader function, check "Options" section for details
-const loader = require("./coursehunters-downloader");
+const loader = require("coursehunters-downloader");
 
 const url = "https://coursehunters.net/course/regulyarnye-vyrazheniya";
 

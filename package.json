@@ -18,5 +18,8 @@
   "license": "MIT",
   "devDependencies": {
     "uglify-es": "^3.3.9"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
   }
 }
