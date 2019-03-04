@@ -3,7 +3,7 @@ const l = console.log.bind(console);
 const axios = require("axios"),
   { createWriteStream, existsSync, mkdirSync } = require("fs");
 
-const loader = (courseURL, dataSize = "all", baseDir) => {
+const loader = (courseURL, { from, to }, baseDir) => {
   const getURLs = async url => {
     const list = {
         from: `<ul id="lessons-list" class="lessons-list">`,
@@ -38,12 +38,32 @@ const loader = (courseURL, dataSize = "all", baseDir) => {
     const { baseURL, lessonsNumber, dir } = await getURLs(courseURL);
     if (!baseURL) return;
 
+    const getRange = (from = 1, to = lessonsNumber) => {
+      if (Array.isArray(from)) return from;
+      if (Array.isArray(to)) return to;
+
+      if (typeof (from + to) !== "number") {
+        l(
+          `Invalid data type! typeof (from) is ${typeof from}, typeof (to) is ${typeof to}`
+        );
+        return undefined;
+      }
+
+      from = Math.max(from, 1);
+      to = Math.min(to, lessonsNumber);
+
+      const arr = [];
+      for (let i = from; i < to + 1; i++) arr.push(i);
+      return arr;
+    };
+
     if (!baseDir) baseDir = dir;
-    if (dataSize === "all") dataSize = lessonsNumber;
-    let counter = dataSize - 1;
+    const range = getRange(from, to);
+    if (!range) return;
+    let counter = range.length - 1;
     const route = id => `/lesson${id}.mp4`;
 
-    for (let i = 1; i < dataSize + 1; i++) {
+    for (let i of range) {
       let data;
       try {
         ({ data } = await axios.get(baseURL + route(i), {
